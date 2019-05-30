@@ -10,6 +10,12 @@ class Neighborhood(models.Model):
     def __str__(self):
         return self.hood_name
 
+    def save_neighbour(self):
+        self.save()
+
+    def delete_neighbour(self):
+        self.delete()
+
 class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='prof_pics/',blank=True)
     user_location = models.CharField(max_length=200)
@@ -25,10 +31,10 @@ class Business(models.Model):
     class Meta:
         ordering = ['-id']
 
-    class save_business(self):
+    def save_business(self):
         self.save()
 
-    class delete_business(self):
+    def delete_business(self):
         self.delete()
     
     class f
