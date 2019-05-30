@@ -7,7 +7,9 @@ from .forms import *
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    return render(request,'hood_app/index.html')
+    profile = Profile.objects.all()
+    all_posts = Post.objects.all()
+    return render(request,'hood_app/index.html',{"all_posts":all_posts,"prof_info":profile})
 
 @login_required(login_url='/accounts/login/')
 def new_profile(request):
@@ -67,3 +69,15 @@ def new_business(request):
 def business(request):
     all_businesses = Business.objects.all()
     return render(request,'business/business_index.html',{"all_businesses":all_businesses})
+
+def search_post(request):
+    if 'post' in request.GET and request.GET ["post"]:
+        search_term = request.GET.get("post")
+        searched_posts = Post.search_project_by_title(search_term)
+        message = f'{search_term}'
+
+        return render(request, 'search/search.html', {"message":message, "post":searched_posts})
+
+    else:
+        message = "No search results yet!"
+        return render (request, 'search/search.html', {"message": message})
