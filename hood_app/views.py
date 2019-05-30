@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from .models import *
+from .forms import *
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -37,12 +40,30 @@ def profile_edit(request):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
-    projects = Project.objects.filter(user = current_user)
+    business = Business.objects.filter(business_owner = current_user)
 
     try:   
         prof = Profile.objects.get(prof_user=current_user)
     except ObjectDoesNotExist:
         return redirect('new_profile')
 
-    return render(request,'profile/profile.html',{'profile':prof,'projects':projects})
+    return render(request,'profile/profile.html',{'profile':prof,'business':business})
 
+@login_required(login_url='/accounts/login/')
+def new_business(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = BusinessForm(request.POST,request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.business_owner = current_user
+            business.save()
+        return redirect('home')
+    else:
+        form = BusinessForm()
+    return render(request,"business/business_form.html",{"form":form})
+
+@login_required(login_url='/accounts/login/')
+def business(request):
+    all_businesses = Business.objects.all()
+    return render(request,'business/business_index.html',{"all_businesses":all_businesses})
