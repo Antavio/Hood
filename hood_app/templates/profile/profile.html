@@ -27,14 +27,17 @@
         </div>
         <!-- Card deck -->
         <div class="card-deck">
-            {% for single_project in projects %}
+            {% for single_business in business %}
             <!-- Card -->
             <div class="col-md-4">
                 <div class="card mb-3">
 
                     <!--Card image-->
-                    <div class="view overlay">
-                        <img class="card-img-top" src="{{single_project.image.url}}" alt="{{single_project.title}}">
+                    <div>
+                        <!-- <img class="card-img-top" src="{{single_project.image.url}}" alt="{{single_project.title}}"> -->
+                        <p>{{single_business.business_name}}</p>
+                        <p>{{single_business.business_email}}</p>
+                        
                     </div>
                 </div>
             </div>

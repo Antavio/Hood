@@ -1,0 +1,43 @@
+{% extends 'hood_app/base.html' %}
+{% block content %}
+<div class="container-fluid">
+
+  <div class="row heading" style="margin-left:20px;">
+    {% if post %}
+    <h2>Found {{ post|length }} projects of searched term {{message}}</h2>
+    {% else %}
+    <h2> Found no post for the search term {{message}}</h2>
+    {% endif %}
+
+  </div>
+  <div class="row">
+    {% for single_post in post %}
+
+    <div class="col-md-4 main-page d-flex" style=" margin-top: 10px;">
+      <div class="card card-cascade wider flex-fill">
+
+        <!-- Card image -->
+        <div class="view view-cascade overlay">
+          <img class="card-img-top" src="{{single_post.post_picture.url}}" alt="{{single_post.post_name}}">
+
+        </div>
+        <!--Card content-->
+        <div class="card-body">
+
+          <!--Title-->
+          <h4 class="card-title">{{single_post.post_name}}</h4>
+          <!--Text-->
+          <p class="card-text">{{single_post.post_description}}</p>        
+          <p><cite>{{single_post.date_posted}}</cite></p>
+
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="row">
+      <h1 class="text-center"> No Images Yet</h1>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
