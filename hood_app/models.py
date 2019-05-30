@@ -37,7 +37,14 @@ class Business(models.Model):
     def delete_business(self):
         self.delete()
     
-    class f
+    @classmethod
+    def search_project_by_title(cls,search_term):
+        post = cls.objects.filter(post_name__icontains=search_term)
+        return post
+
+    
+    
+    
 
 class Post(models.Model):
     post_picture = models.ImageField(upload_to='posts/',blank=True)
@@ -48,7 +55,4 @@ class Post(models.Model):
     def __str__(self):
         return self.post_name
 
-    @classmethod
-    def search_project_by_title(cls,search_term):
-        post = cls.objects.filter(post_name__icontains=search_term)
-        return post
+    
