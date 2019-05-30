@@ -10,10 +10,10 @@ class Neighborhood(models.Model):
     def __str__(self):
         return self.hood_name
 
-    def save_neighbour(self):
+    def save_hood(self):
         self.save()
 
-    def delete_neighbour(self):
+    def delete_hood(self):
         self.delete()
 
 class Profile(models.Model):

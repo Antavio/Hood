@@ -14,3 +14,21 @@ class ProfileTestClass(TestCase):
         self.new_profile.save_profile()
         profiles = Profile.objects.all()
         self.assertTrue(len(profiles) > 0)
+
+    def test_delete_profile(self):
+        self.new_profile.delete_profile()
+        profiles = Profile.objects.all()
+        self.assertTrue(len(profiles) == 0)
+
+class NeighbourhoodTestClass(TestCase):
+    def setUp(self):
+        self.new_hood = Neighborhood(id=1,hood_name='Mtaani',hood_location="Nairobi",occupants=10)
+    
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_hood,Neighborhood))
+
+    def test_save_instance(self):
+        self.new_hood = Neighborhood(id=1,hood_name='Mtaani',hood_location="Nairobi",occupants=10)
+        self.new_hood.save_hood()
+        posts = Post.objects.all()
+        self.assertTrue(len(posts)>0)
