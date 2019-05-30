@@ -25,6 +25,14 @@ class Business(models.Model):
     class Meta:
         ordering = ['-id']
 
+    class save_business(self):
+        self.save()
+
+    class delete_business(self):
+        self.delete()
+    
+    class f
+
 class Post(models.Model):
     post_picture = models.ImageField(upload_to='posts/',blank=True)
     post_name = models.CharField(max_length=200)
