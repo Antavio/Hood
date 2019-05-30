@@ -24,3 +24,17 @@ class Business(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+class Post(models.Model):
+    post_picture = models.ImageField(upload_to='posts/',blank=True)
+    post_name = models.CharField(max_length=200)
+    post_description = models.TextField()
+    date_posted = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.post_name
+
+    @classmethod
+    def search_project_by_title(cls,search_term):
+        post = cls.objects.filter(post_name__icontains=search_term)
+        return post
