@@ -81,3 +81,8 @@ def search_post(request):
     else:
         message = "No search results yet!"
         return render (request, 'search/search.html', {"message": message})
+
+@login_required(login_url='/accounts/login/')
+def contact(request):
+    contacts = ContactInfo.objects.all()
+    return render(request,'hood_app/contact_info.html',{"contacts":contacts})
