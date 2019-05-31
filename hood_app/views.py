@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 from .models import *
 from .forms import *
 # Create your views here.
@@ -67,8 +68,18 @@ def new_business(request):
 
 @login_required(login_url='/accounts/login/')
 def business(request):
-    all_businesses = Business.objects.all()
-    return render(request,'business/business_index.html',{"all_businesses":all_businesses})
+    current_user = request.user
+    try:
+        profile = Profile.objects.filter(prof_user=request.user)
+        arr=[]
+        for business in profile:
+            arr.append(business.hood_id.id)
+        id=arr[0]
+        all_businesses = Business.objects.filter(business_hood_id=id)
+    except Exception as e:
+        raise Http404()
+     
+    return render(request,'business/business_index.html',{"id":id,"all_businesses":all_businesses})
 
 def search_post(request):
     if 'post' in request.GET and request.GET ["post"]:
