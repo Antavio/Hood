@@ -11,7 +11,8 @@ urlpatterns=[
     url(r'^edit/profile/$',views.profile_edit,name = 'edit_profile'),
     url(r'business_list/$',views.business,name='business'),
     url(r'^search/',views.search_post, name='search_results'),
-    url(r'contact-us/$',views.contact, name='contact-us')
+    url(r'contact-us/$',views.contact, name='contact-us'),
+    url(r'new_post/$',views.new_post,name='create-post'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
