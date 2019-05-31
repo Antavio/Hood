@@ -55,15 +55,19 @@ class Post(models.Model):
     post_name = models.CharField(max_length=200)
     post_description = models.TextField()
     date_posted = models.DateField(auto_now=True)
-
+    post_owner = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    hood_post = models.ForeignKey(Neighborhood,on_delete=models.CASCADE,null=True)
     def __str__(self):
         return self.post_name
 
-class ContactInfo(models.Model):
+    class Meta:
+        ordering = ['-id']
 
+class ContactInfo(models.Model):
     health_department = models.CharField(max_length=200)
     police_department = models.CharField(max_length=200)
     hood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE,null=True)
+
     def __str__(self):
         return self.health_department
 

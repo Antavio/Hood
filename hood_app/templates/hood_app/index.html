@@ -14,7 +14,7 @@
 
                 <!-- Card -->
                 <div class="card mb-4">
-
+                    <div class="card-header"><strong>Hood: </strong>{{post.hood_post}}</div>
                     <!--Card image-->
                     <div class="view overlay">
                         <img class="card-img-top" src="{{post.post_picture.url}}" alt="Card image cap">
@@ -29,12 +29,14 @@
                         <!--Title-->
                         <h4 class="card-title">{{post.post_name}}</h4>
                         <!--Text-->
-                        <p><i class="fas fa-quote-left"> </i>{{ post.post_description }}<i class="fas fa-quote-right"> </i></p>
+                        <p><i class="fas fa-quote-left"> </i>{{ post.post_description }}<i class="fas fa-quote-right">
+                            </i></p>
                     </div>
                     <!-- Card footer -->
                     <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
                         <ul class="list-unstyled list-inline font-small">
-                            <li class="list-inline-item pr-2 white-text"> Posted on: <i class="far fa-clock pr-1"></i>{{post.date_posted}}
+                            <li class="list-inline-item pr-2 white-text"> Posted on: <i
+                                    class="far fa-clock pr-1"></i>{{post.date_posted}}
                             </li>
                         </ul>
                     </div>
