@@ -86,3 +86,18 @@ def search_post(request):
 def contact(request):
     contacts = ContactInfo.objects.all()
     return render(request,'hood_app/contact_info.html',{"contacts":contacts})
+
+@login_required(login_url='/accounts/login/')
+def new_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST,request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.post_owner = current_user
+            post.save()
+        return redirect('home')
+    else:
+        form = PostForm()
+    return render(request,"posts/create_post.html",{"form":form})
+
