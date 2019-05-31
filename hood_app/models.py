@@ -46,9 +46,7 @@ class Business(models.Model):
     @classmethod
     def search_project_by_title(cls,search_term):
         post = cls.objects.filter(post_name__icontains=search_term)
-        return post
-
-    
+        return post    
     
     
 
@@ -61,4 +59,11 @@ class Post(models.Model):
     def __str__(self):
         return self.post_name
 
-    
+class ContactInfo(models.Model):
+
+    health_department = models.CharField(max_length=200)
+    police_department = models.CharField(max_length=200)
+    hood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE,null=True)
+    def __str__(self):
+        return self.health_department
+
