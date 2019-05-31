@@ -8,8 +8,19 @@ from .forms import *
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    profile = Profile.objects.all()
-    all_posts = Post.objects.all()
+
+    current_user = request.user    
+    profile = Profile.objects.filter(prof_user=request.user)
+
+    arr=[]
+    for post in profile:
+        arr.append(post.hood_id.id)
+    if len(arr)>0:
+        id=arr[0]
+        all_posts = Post.objects.filter(hood_post=id)
+    else:
+        all_posts = ""       
+
     return render(request,'hood_app/index.html',{"all_posts":all_posts,"prof_info":profile})
 
 @login_required(login_url='/accounts/login/')
@@ -44,13 +55,13 @@ def profile_edit(request):
 def profile(request):
     current_user = request.user
     business = Business.objects.filter(business_owner = current_user)
-
+    posts = Post.objects.filter(post_owner = current_user)
     try:   
         prof = Profile.objects.get(prof_user=current_user)
     except ObjectDoesNotExist:
         return redirect('new_profile')
 
-    return render(request,'profile/profile.html',{'profile':prof,'business':business})
+    return render(request,'profile/profile.html',{'profile':prof,'business':business,'posts':posts})
 
 @login_required(login_url='/accounts/login/')
 def new_business(request):
