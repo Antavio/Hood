@@ -79,6 +79,12 @@ class Post(models.Model):
     class Meta:
         ordering = ['-id']
 
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()
+
 class ContactInfo(models.Model):
     health_department = models.CharField(max_length=200)
     police_department = models.CharField(max_length=200)
@@ -86,4 +92,11 @@ class ContactInfo(models.Model):
 
     def __str__(self):
         return self.health_department
+
+    def save_contact(self):
+        self.save()
+
+    def delete_contact(self):
+        self.delete()
+        
 
