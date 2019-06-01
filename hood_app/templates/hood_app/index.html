@@ -5,7 +5,7 @@
         <h4 class="text-center heading"> Hood Posts</h4>
     </div>
     <div class="row">
-        {% for post in posts %}
+        {% for post in all_posts %}
 
         <div class="col-md-4 main-page d-flex" style=" margin-top: 5px;">
             <!-- Card -->
@@ -47,11 +47,13 @@
         </div>
         {% empty %}
         <div class="row">   
-            <h2 style="margin-left:100px;">N0 Posts Yet</h2>
+            <h2 style="margin-left:100px;">Create a Profile to view Businesses and Posts</h2>
         </div>
         {% endfor %}
     </div>
     <!-- Card deck -->
+    <div class="row">
+    </div>
 
 </div>
 {% endblock %}
