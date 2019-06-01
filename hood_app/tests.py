@@ -28,7 +28,17 @@ class NeighbourhoodTestClass(TestCase):
         self.assertTrue(isinstance(self.new_hood,Neighborhood))
 
     def test_save_instance(self):
-        self.new_hood = Neighborhood(id=1,hood_name='Mtaani',hood_location="Nairobi",occupants=10)
         self.new_hood.save_hood()
-        posts = Post.objects.all()
-        self.assertTrue(len(posts)>0)
+        hood = Neighborhood.objects.all()
+        self.assertTrue(len(hood)>0)
+
+    def test_find_hood(self):
+        self.new_hood.save_hood()
+        neighbourhood = Neighborhood.search_neighbourhood(1)
+        self.assertEqual(neighbourhood.hood_name,'Mtaani')
+
+    def test_update_hood(self):
+        self.new_hood.save_hood()
+        neighborhood = Neighborhood.search_neighbourhood(1)
+        neighborhood.hood_name = 'Updated Mtaa'
+        self.assertEqual(neighborhood.hood_name,'Updated Mtaa')
