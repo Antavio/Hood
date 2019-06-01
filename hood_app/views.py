@@ -95,7 +95,7 @@ def business(request):
 def search_post(request):
     if 'post' in request.GET and request.GET ["post"]:
         search_term = request.GET.get("post")
-        searched_posts = Post.search_project_by_title(search_term)
+        searched_posts = Business.search_business_by_title(search_term)
         message = f'{search_term}'
 
         return render(request, 'search/search.html', {"message":message, "post":searched_posts})

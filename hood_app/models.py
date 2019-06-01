@@ -44,8 +44,8 @@ class Business(models.Model):
         self.delete()
     
     @classmethod
-    def search_project_by_title(cls,search_term):
-        post = cls.objects.filter(post_name__icontains=search_term)
+    def search_business_by_title(cls,search_term):
+        post = cls.objects.filter(business_name__icontains=search_term)
         return post    
     
     
