@@ -22,11 +22,15 @@ class Profile(models.Model):
     prof_user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     hood_id = models.ForeignKey(Neighborhood,on_delete=models.CASCADE,null=True)
 
+    def __str__(self):
+        return self.prof_user
+
     def save_profile(self):
         self.save()
 
     def delete_profile(self):
         self.delete()
+
 
 class Business(models.Model):
     business_name = models.CharField(max_length=200)
