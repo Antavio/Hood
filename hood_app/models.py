@@ -16,6 +16,15 @@ class Neighborhood(models.Model):
     def delete_hood(self):
         self.delete()
 
+    @classmethod
+    def search_neighbourhood(cls,hood_id):
+        hood = cls.objects.get(id=hood_id)
+        return hood 
+
+    def update_hood(self,name):
+        self.hood_name = name
+        self.save()
+
 class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='prof_pics/',blank=True)
     user_location = models.CharField(max_length=200)

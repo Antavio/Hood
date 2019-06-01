@@ -11,7 +11,7 @@ def home(request):
 
     current_user = request.user    
     profile = Profile.objects.filter(prof_user=request.user)
-
+    hoodie = Neighborhood.objects.all()
     arr=[]
     for post in profile:
         arr.append(post.hood_id.id)
@@ -21,7 +21,7 @@ def home(request):
     else:
         all_posts = ""       
 
-    return render(request,'hood_app/index.html',{"all_posts":all_posts,"prof_info":profile})
+    return render(request,'hood_app/index.html',{"all_posts":all_posts,"prof_info":profile,"hoodie":hoodie})
 
 @login_required(login_url='/accounts/login/')
 def new_profile(request):
