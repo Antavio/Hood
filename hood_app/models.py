@@ -60,7 +60,10 @@ class Business(models.Model):
     def search_business_by_title(cls,search_term):
         post = cls.objects.filter(business_name__icontains=search_term)
         return post    
-    
+    @classmethod
+    def search_business(cls,biz_id):
+        business = cls.objects.get(id=biz_id)
+        return business 
     
 
 class Post(models.Model):
