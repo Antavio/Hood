@@ -32,6 +32,11 @@ class NeighbourhoodTestClass(TestCase):
         hood = Neighborhood.objects.all()
         self.assertTrue(len(hood)>0)
 
+    def test_delete_instance(self):
+        self.new_hood.delete_hood()
+        hood = Neighborhood.objects.all()
+        self.assertTrue(len(hood)==0)
+
     def test_find_hood(self):
         self.new_hood.save_hood()
         neighbourhood = Neighborhood.search_neighbourhood(1)
@@ -42,3 +47,34 @@ class NeighbourhoodTestClass(TestCase):
         neighborhood = Neighborhood.search_neighbourhood(1)
         neighborhood.hood_name = 'Updated Mtaa'
         self.assertEqual(neighborhood.hood_name,'Updated Mtaa')
+
+class BusinessTestClass(TestCase):
+    def setUp(self):
+        self.new_user = User.objects.create_user(username='user',password='password')
+        self.new_hood = Neighborhood(id=1,hood_name='Mtaani',hood_location="Nairobi",occupants=10)
+        self.new_hood.save_hood()
+        self.new_biz = Business(id=1,business_name='Bizna',business_email="biz@mail.com",business_owner=self.new_user,business_hood_id=self.new_hood)            
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_biz,Business))
+
+    def test_save_instance(self):
+        self.new_biz.save_business()
+        biznas = Business.objects.all()
+        self.assertTrue(len(biznas)>0)
+
+    def test_delete_instance(self):
+        self.new_biz.delete_business()
+        biznas = Business.objects.all()
+        self.assertTrue(len(biznas)==0)
+
+    def test_find_biz(self):
+        self.new_biz.save_business()
+        bizz = Business.search_business(1)
+        self.assertEqual(bizz.business_name,'Bizna')
+
+    def test_update_business(self):
+        self.new_biz.save_business()
+        bizz = Business.search_business(1)
+        bizz.business_name = 'Updated Bizna'
+        self.assertEqual(bizz.business_name,'Updated Bizna')
