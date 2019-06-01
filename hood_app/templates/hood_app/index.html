@@ -46,14 +46,19 @@
             <!-- Card -->
         </div>
         {% empty %}
-        <div class="row">   
+        <div class="row">
             <h2 style="margin-left:100px;">Create a Profile to view Businesses and Posts</h2>
+
         </div>
         {% endfor %}
     </div>
-    <!-- Card deck -->
+
+    {% if prof_info %}
+    {% else %}
     <div class="row">
+        <a href="{% url 'new_profile'%}" class="btn btn-info btn-lg" style="margin-left:550px;">Create a profile</a>
     </div>
+    {% endif %}
 
 </div>
 {% endblock %}
