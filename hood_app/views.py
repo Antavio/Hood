@@ -93,7 +93,7 @@ def business(request):
     except Exception as e:
         raise Http404()
      
-    return render(request,'business/business_index.html',{"all_businesses":all_businesses})
+    return render(request,'business/business_index.html',{"all_businesses":all_businesses,"profile":profile})
 
 def search_post(request):
     if 'post' in request.GET and request.GET ["post"]:

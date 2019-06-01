@@ -28,14 +28,20 @@
 
 
         {% empty %}
-        <div class="row">
-            <h1 class="text-center" style="margin-left:20px;"> No Businesses Posted Yet</h1>
+        <div class="row" style="margin-top:50px;">
+            <h2 class="heading" style="margin-left:500px;"> No Businesses Posted Yet!!!!!!!</h2>
         </div>
         {% endfor %}
     </div>
     <!-- Card deck -->
-    <div class="row">
+    {% if profile%}
+    {% else %}
+    <div class="row" style="margin-top:50px;">
+        <div class="row">
+            <h3 style="margin-left:500px;" class="heading"> To view Business Create a Profile</h3>
+            <a href="{% url 'new_profile'%}" class="btn btn-info btn-lg" style="margin-left:550px;">Create a profile</a>
+        </div>
     </div>
-
+    {% endif %}
 </div>
 {% endblock%}
