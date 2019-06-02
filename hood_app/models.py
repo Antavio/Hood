@@ -50,6 +50,9 @@ class Business(models.Model):
     class Meta:
         ordering = ['-id']
 
+    def __str__(self):
+        return self.business_name
+
     def save_business(self):
         self.save()
 
@@ -98,5 +101,5 @@ class ContactInfo(models.Model):
 
     def delete_contact(self):
         self.delete()
-        
+
 
